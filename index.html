@@ -1,40 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy - Jee Leang Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>កត់ត្រាចំណូលចំណាយ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #222; }
-  h1 { font-size: 28px; }
-  h2 { font-size: 20px; margin-top: 28px; }
+:root{--bg:#f4f6f8;--card:#fff;--tx:#1b2430;--mut:#6b7684;--bd:#dde3ea;--pri:#0f766e;--pri2:#14b8a6;--onpri:#fff;--inc:#15803d;--exp:#c2410c;--pbg:#e6f4f2}
+body[data-mode=biz]{--pri:#4338ca;--pri2:#818cf8;--pbg:#eceafd}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12171c;--card:#1b222a;--tx:#e8edf2;--mut:#93a0ae;--bd:#2c3642;--pri:#2dd4bf;--pri2:#0f766e;--onpri:#06201d;--inc:#4ade80;--exp:#fb923c;--pbg:#16302d}
+:root:not([data-theme="light"]) body[data-mode=biz]{--pri:#a5b4fc;--pri2:#4338ca;--pbg:#23244a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12171c;--card:#1b222a;--tx:#e8edf2;--mut:#93a0ae;--bd:#2c3642;--pri:#2dd4bf;--pri2:#0f766e;--onpri:#06201d;--inc:#4ade80;--exp:#fb923c;--pbg:#16302d}
+:root[data-theme="dark"] body[data-mode=biz]{--pri:#a5b4fc;--pri2:#4338ca;--pbg:#23244a}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Noto Sans Khmer',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:640px;margin:0 auto;padding:14px}
+h1{font-size:19px;margin:0}
+.hd{background:linear-gradient(135deg,var(--pri),var(--pri2));color:var(--onpri);border-radius:18px;padding:16px 16px 18px;margin-bottom:12px;transition:.3s}
+.hd small{opacity:.85;display:block}
+.hd .big{font-size:26px;font-weight:700;margin-top:6px}
+.sw{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:5px}
+.sw .pill{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);background:var(--pri);border-radius:12px;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+body[data-mode=biz] .sw .pill{transform:translateX(100%)}
+.sw button{position:relative;z-index:1;border:0;background:none;font:inherit;color:var(--mut);padding:9px 6px;cursor:pointer;line-height:1.35;transition:color .3s}
+.sw button b{display:block;font-size:14px}.sw button span{font-size:11px;opacity:.85}
+.sw button.on{color:var(--onpri)}
+.it .acts{display:flex;gap:12px;justify-content:flex-end;margin-top:2px}
+.it .acts button{font-size:13px;color:var(--mut)}
+.ed{border:1px solid var(--pri)!important}
+#undo{margin-left:12px;color:#7dd3fc;background:none;border:0;font:inherit;font-weight:700;cursor:pointer}
+.seg{display:flex;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:8px 6px;border-radius:9px;cursor:pointer}
+.seg button.on{background:var(--pri);color:var(--onpri)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-top:12px}
+.row{display:flex;gap:8px;align-items:center;margin-top:10px}
+.row>*{flex:1;min-width:0}
+input,select{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:9px 10px}
+label{font-size:13px;color:var(--mut);display:block;margin-top:10px}
+.sums{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sum{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
+.sum small{color:var(--mut);display:block}
+.sum b{font-size:17px}
+.sum.full{grid-column:1/-1;background:var(--pbg)}
+.inc{color:var(--inc)}.exp{color:var(--exp)}
+.btn{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;background:var(--pri);color:var(--onpri);width:100%;margin-top:12px}
+.btn.alt{background:var(--bg);color:var(--tx);border:1px solid var(--bd);margin-top:0}
+.tt{display:flex;gap:8px}.tt button{flex:1;padding:9px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font:inherit;font-weight:600;cursor:pointer}
+.tt button.in.on{background:var(--inc);color:#fff;border-color:var(--inc)}
+.tt button.out.on{background:var(--exp);color:#fff;border-color:var(--exp)}
+.it{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}
+.it:last-child{border:0}
+.it small{color:var(--mut);display:block}
+.it .r{text-align:right;white-space:nowrap}
+.it button{border:0;background:none;color:var(--mut);cursor:pointer;font-size:12px;padding:0}
+.empty{color:var(--mut);text-align:center;padding:14px}
+#toast{display:none;align-items:center;position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:9;max-width:90%}
+#rep{position:fixed;left:-9999px;top:0;width:700px;background:#fff;color:#111;padding:28px;font-family:'Noto Sans Khmer',sans-serif;font-size:13px;line-height:1.7}
+#rep table{width:100%;border-collapse:collapse;margin-top:10px}
+#rep th,#rep td{border:1px solid #bbb;padding:4px 6px;text-align:left}
+#rep th{background:#e6f4f2}
 </style>
 </head>
 <body>
-<h1>Privacy Policy</h1>
-<p>Last updated: October 30, 2026</p>
+<div class="wrap">
+  <div class="hd"><h1>📒 កត់ត្រាចំណូល-ចំណាយ</h1><small id="hs"></small><div class="big" id="hb"></div></div>
+  <div class="sw" id="modeSeg">
+    <div class="pill"></div>
+    <button data-m="gen"><b>💰 ប្រើប្រាស់ប្រចាំថ្ងៃ</b><span>ចំណូល-ចំណាយផ្ទាល់ខ្លួន</span></button>
+    <button data-m="biz"><b>🏪 គ្រប់គ្រងការលក់</b><span>អាជីវកម្មតូច</span></button>
+  </div>
 
-<p>This Privacy Policy explains how Jee Leang Online and our app DropCatch ("we", "us") collect, use and protect information when you interact with our Facebook Page and services.</p>
+  <div class="card">
+    <div class="tt"><button class="in on" data-t="in" id="tIn">ចំណូល</button><button class="out" data-t="out" id="tOut">ចំណាយ</button></div>
+    <div class="row">
+      <div><label>កាលបរិច្ឆេទ</label><input type="date" id="fd"></div>
+      <div><label>ប្រភេទ</label><select id="fc"></select></div>
+    </div>
+    <div id="bizF" class="row" style="display:none">
+      <div><label>ចំនួន</label><input type="number" id="fq" min="0" step="any" placeholder="1"></div>
+      <div><label>តម្លៃឯកតា</label><input type="number" id="fp" min="0" step="any" placeholder="0"></div>
+    </div>
+    <label>ចំនួនទឹកប្រាក់</label><input type="number" id="fa" min="0" step="any" placeholder="0">
+    <label>កំណត់ចំណាំ / ឈ្មោះទំនិញ</label><input type="text" id="fn" placeholder="ស្រេចចិត្ត">
+    <button class="btn" id="add">＋ បន្ថែម</button>
+    <button class="btn alt" id="cancel" style="display:none;margin-top:8px">បោះបង់ការកែ</button>
+  </div>
 
-<h2>Information we collect</h2>
-<p>When you message our Facebook Page or place an order, we may receive your name, your public Facebook profile information, the messages you send us, and order details such as your phone number, delivery address and the items you want to buy.</p>
+  <div class="card">
+    <div class="seg" id="perSeg">
+      <button data-p="day">ថ្ងៃ</button><button data-p="month">ខែ</button><button data-p="year">ឆ្នាំ</button>
+    </div>
+    <div class="row"><input id="ref"><select id="cur"><option value="៛">៛ រៀល</option><option value="$">$ ដុល្លារ</option></select></div>
+    <div class="sums" id="sums"></div>
+  </div>
 
-<h2>How we use information</h2>
-<p>We use this information only to reply to your messages, process and deliver your orders, provide customer support, and manage our online sales.</p>
+  <div class="card"><div id="list"></div></div>
 
-<h2>Sharing of information</h2>
-<p>We do not sell your personal information. We share it only with service providers needed to complete your order (for example, delivery companies) and when required by law.</p>
+  <div class="row" style="margin:12px 0 30px">
+    <button class="btn alt" id="xl">📊 Excel</button>
+    <button class="btn alt" id="pf">📄 PDF</button>
+  </div>
+</div>
+<div id="toast"></div>
+<div id="rep"></div>
 
-<h2>Data retention and security</h2>
-<p>We keep your information only as long as needed to serve you and meet legal or accounting needs. We take reasonable steps to protect it from unauthorized access.</p>
+<script>
+const CATS={gen:{in:['ប្រាក់ខែ','ប្រាក់បន្ថែម','អំណោយ','ផ្សេងៗ'],out:['អាហារ','ធ្វើដំណើរ','ទឹក-ភ្លើង','ជួលផ្ទះ','សុខភាព','កម្សាន្ត','ផ្សេងៗ']},
+biz:{in:['លក់ទំនិញ','សេវាកម្ម','ផ្សេងៗ'],out:['ទិញស្តុក','ឈ្នួលបុគ្គលិក','ជួលហាង','ដឹកជញ្ជូន','ផ្សព្វផ្សាយ','ផ្សេងៗ']}};
+const TT={gen:['ចំណូល','ចំណាយ','សមតុល្យ'],biz:['ចំណូលលក់','ចំណាយ','ប្រាក់ចំណេញ']};
+const MODE_NAME={gen:'ប្រើប្រាស់ប្រចាំថ្ងៃ',biz:'គ្រប់គ្រងការលក់'};
+let editId=null,lastDel=null;
+let S={mode:'gen',per:'month',cur:'៛',type:'in',data:{gen:[],biz:[]}};
+try{const r=localStorage.getItem('mt1');if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem('mt1',JSON.stringify(S))}catch(e){}};
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const fmt=n=>{const v=Math.round(n*100)/100;return S.cur==='$'?'$'+v.toLocaleString('en-US'):v.toLocaleString('en-US')+' ៛'};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let ref={day:today(),month:today().slice(0,7),year:today().slice(0,4)};
+function toast(m,undo){const t=$('toast');t.textContent=m;if(undo){const u=document.createElement('button');u.id='undo';u.textContent='ត្រឡប់វិញ';u.onclick=undoDel;t.appendChild(u)}t.style.display='flex';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',undo?6000:2600)}
 
-<h2>Data deletion</h2>
-<p>You can ask us to delete your data at any time by emailing us at <strong>chheoungchhan007@gmail.com</strong> with the subject "Delete my data". We will delete your information within 30 days.</p>
+function inRange(e){const r=ref[S.per];return e.d.slice(0,r.length)===r}
+function rows(){return S.data[S.mode].filter(inRange).sort((a,b)=>b.d.localeCompare(a.d)||b.id-a.id)}
+function totals(rs){let i=0,o=0;rs.forEach(e=>e.t==='in'?i+=e.a:o+=e.a);return{i,o,b:i-o}}
 
-<h2>Contact us</h2>
-<p>Jee Leang Online<br>Email: <strong>chheoungchhan007@gmail.com</strong></p>
+function fillCats(){$('fc').innerHTML=CATS[S.mode][S.type].map(c=>`<option>${c}</option>`).join('')}
+function setRefInput(){
+  const el=$('ref');
+  if(S.per==='year'){el.type='number';el.min='2000';el.max='2100'}else el.type=S.per==='day'?'date':'month';
+  el.value=ref[S.per];
+}
+function render(){
+  document.body.dataset.mode=S.mode;
+  $('hs').textContent=MODE_NAME[S.mode]+' · '+ref[S.per];
+  document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));
+  document.querySelectorAll('#perSeg button').forEach(b=>b.classList.toggle('on',b.dataset.p===S.per));
+  $('tIn').classList.toggle('on',S.type==='in');$('tOut').classList.toggle('on',S.type==='out');
+  $('bizF').style.display=S.mode==='biz'&&S.type==='in'?'flex':'none';
+  $('cur').value=S.cur;
+  const rs=rows(),t=totals(rs),n=TT[S.mode];
+  $('hb').textContent=fmt(t.b);$('hs').textContent=MODE_NAME[S.mode]+' · '+n[2]+' · '+ref[S.per];
+  $('sums').innerHTML=`<div class="sum"><small>${n[0]}</small><b class="inc">${fmt(t.i)}</b></div>
+  <div class="sum"><small>${n[1]}</small><b class="exp">${fmt(t.o)}</b></div>
+  <div class="sum full"><small>${n[2]}</small><b class="${t.b>=0?'inc':'exp'}">${fmt(t.b)}</b></div>`;
+  $('list').innerHTML=rs.length?rs.map(e=>`<div class="it"><div><b>${esc(e.c)}</b><small>${e.d}${e.n?' · '+esc(e.n):''}${e.q?' · '+e.q+'×'+e.p:''}</small></div>
+  <div class="r"><b class="${e.t==='in'?'inc':'exp'}">${e.t==='in'?'+':'−'}${fmt(e.a)}</b><div class="acts"><button data-edit="${e.id}">✏️ កែ</button><button data-del="${e.id}">🗑 លុប</button></div></div></div>`).join(''):'<div class="empty">មិនទាន់មានទិន្នន័យក្នុងរយៈពេលនេះ</div>';
+  save();
+}
 
-<h2>Changes to this policy</h2>
-<p>We may update this policy from time to time. The latest version will always be posted on this page.</p>
+$('modeSeg').onclick=e=>{const m=e.target.closest('button')?.dataset.m;if(m){stopEdit();S.mode=m;fillCats();render()}};
+$('perSeg').onclick=e=>{const p=e.target.dataset.p;if(p){S.per=p;setRefInput();render()}};
+document.querySelector('.tt').onclick=e=>{const t=e.target.dataset.t;if(t){S.type=t;fillCats();render()}};
+$('ref').onchange=e=>{if(e.target.value){ref[S.per]=e.target.value;render()}};
+$('cur').onchange=e=>{S.cur=e.target.value;render()};
+function calc(){const q=+$('fq').value,p=+$('fp').value;if(q&&p)$('fa').value=q*p}
+$('fq').oninput=calc;$('fp').oninput=calc;
+$('add').onclick=()=>{
+  const a=+$('fa').value;
+  if(!(a>0)||!$('fd').value){toast('សូមបញ្ចូលកាលបរិច្ឆេទ និងចំនួនទឹកប្រាក់');return}
+  const e={id:Date.now(),t:S.type,d:$('fd').value,c:$('fc').value,a,n:$('fn').value.trim()};
+  if(S.mode==='biz'&&S.type==='in'&&+$('fq').value&&+$('fp').value){e.q=+$('fq').value;e.p=+$('fp').value}
+  if(editId){const i=S.data[S.mode].findIndex(x=>x.id===editId);if(i>=0){e.id=editId;S.data[S.mode][i]=e}}else S.data[S.mode].push(e);
+  const was=editId;stopEdit();
+  ['fa','fn','fq','fp'].forEach(i=>$(i).value='');
+  ref.day=e.d;ref.month=e.d.slice(0,7);ref.year=e.d.slice(0,4);setRefInput();
+  render();toast(was?'បានកែប្រែ ✓':'បានរក្សាទុក ✓');
+};
+function stopEdit(){editId=null;$('add').textContent='＋ បន្ថែម';$('cancel').style.display='none';document.querySelector('.card').classList.remove('ed')}
+$('cancel').onclick=()=>{stopEdit();['fa','fn','fq','fp'].forEach(i=>$(i).value='')};
+function undoDel(){if(lastDel){S.data[lastDel.m].push(lastDel.e);lastDel=null;render();$('toast').style.display='none'}}
+$('list').onclick=e=>{
+  const del=e.target.dataset.del,ed=e.target.dataset.edit;
+  if(del){const arr=S.data[S.mode],i=arr.findIndex(x=>x.id==del);if(i>=0){lastDel={m:S.mode,e:arr.splice(i,1)[0]};render();toast('បានលុបកំណត់ត្រា',true)}}
+  if(ed){const x=S.data[S.mode].find(v=>v.id==ed);if(!x)return;
+    editId=x.id;S.type=x.t;fillCats();$('fc').value=x.c;$('fd').value=x.d;$('fa').value=x.a;$('fn').value=x.n||'';$('fq').value=x.q||'';$('fp').value=x.p||'';
+    $('add').textContent='💾 រក្សាទុកការកែ';$('cancel').style.display='block';document.querySelector('.card').classList.add('ed');render();window.scrollTo({top:0,behavior:'smooth'})}
+};
+
+function title(){const p={day:'ថ្ងៃទី ',month:'ខែ ',year:'ឆ្នាំ '}[S.per];return 'របាយការណ៍'+MODE_NAME[S.mode]+' · '+p+ref[S.per]}
+async function out(filename,data){
+  let d=null;try{d=await claude.use('downloads')}catch(e){}
+  if(!d){toast('មិនអាចទាញយកនៅទីនេះទេ');return}
+  try{await d.save({filename,data});toast('បានទាញយក ✓')}catch(e){if(e&&e.code!=='declined')toast('ទាញយកមិនបាន')}
+}
+$('xl').onclick=()=>{
+  const rs=rows().slice().reverse(),t=totals(rs),n=TT[S.mode];
+  const aoa=[[title()],[],['កាលបរិច្ឆេទ','ប្រភេទប្រតិបត្តិការ','ប្រភេទ','ចំនួន','តម្លៃឯកតា','ទឹកប្រាក់ ('+S.cur+')','កំណត់ចំណាំ']];
+  rs.forEach(e=>aoa.push([e.d,e.t==='in'?'ចំណូល':'ចំណាយ',e.c,e.q||'',e.p||'',e.t==='in'?e.a:-e.a,e.n]));
+  aoa.push([],['',n[0],'','','',t.i],['',n[1],'','','',t.o],['',n[2],'','','',t.b]);
+  const ws=XLSX.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:12},{wch:18},{wch:16},{wch:8},{wch:12},{wch:16},{wch:26}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Report');
+  const buf=XLSX.write(wb,{type:'array',bookType:'xlsx'});
+  out('report-'+S.mode+'-'+ref[S.per]+'.xlsx',new Blob([buf]));
+};
+$('pf').onclick=async()=>{
+  const rs=rows().slice().reverse(),t=totals(rs),n=TT[S.mode];
+  $('rep').innerHTML=`<h2 style="margin:0">${esc(title())}</h2>
+  <p style="margin:4px 0">${n[0]}: <b>${fmt(t.i)}</b> &nbsp; ${n[1]}: <b>${fmt(t.o)}</b> &nbsp; ${n[2]}: <b>${fmt(t.b)}</b></p>
+  <table><tr><th>កាលបរិច្ឆេទ</th><th>ប្រភេទ</th><th>កំណត់ចំណាំ</th><th>ចំណូល</th><th>ចំណាយ</th></tr>
+  ${rs.map(e=>`<tr><td>${e.d}</td><td>${esc(e.c)}</td><td>${esc(e.n)}</td><td>${e.t==='in'?fmt(e.a):''}</td><td>${e.t==='out'?fmt(e.a):''}</td></tr>`).join('')}</table>`;
+  try{
+    toast('កំពុងបង្កើត PDF…');
+    if(document.fonts)await document.fonts.ready;
+    const cv=await html2canvas($('rep'),{scale:2,backgroundColor:'#fff'});
+    const {jsPDF}=window.jspdf,pdf=new jsPDF('p','mm','a4');
+    const W=210,H=297,ih=cv.height*W/cv.width,img=cv.toDataURL('image/jpeg',0.92);
+    for(let y=0,pg=0;y<ih;y+=H,pg++){if(pg)pdf.addPage();pdf.addImage(img,'JPEG',0,-y,W,ih)}
+    await out('report-'+S.mode+'-'+ref[S.per]+'.pdf',pdf.output('blob'));
+  }catch(e){toast('បង្កើត PDF មិនបាន')}
+};
+
+$('fd').value=today();fillCats();setRefInput();render();
+</script>
 </body>
 </html>
